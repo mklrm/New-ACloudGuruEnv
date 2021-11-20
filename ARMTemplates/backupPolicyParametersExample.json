@@ -1,0 +1,57 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vaultSubscriptionID": {
+            "value": "964df7ca-3ba4-48b6-a695-1ed9db5723f8"
+        },
+        "vaultResourceGroup": {
+            "value": "1-043b6aaa-playground-sandbox"
+        },
+        "vaultName": {
+            "value": "RecoveryVault0"
+        },
+        "backupManagementType": {
+            "value": "AzureIaasVM"
+        },
+        "policyName": {
+            "value": "asd"
+        },
+        "instantRpRetentionRangeInDays": {
+            "value": 1
+        },
+        "schedule": {
+            "value": {
+                "schedulePolicyType": "SimpleSchedulePolicy",
+                "scheduleRunFrequency": "Daily",
+                "scheduleRunDays": null,
+                "scheduleRunTimes": [
+                    "2021-11-11T10:30:00.000Z"
+                ]
+            }
+        },
+        "timeZone": {
+            "value": "UTC"
+        },
+        "retention": {
+            "value": {
+                "retentionPolicyType": "LongTermRetentionPolicy",
+                "dailySchedule": {
+                    "retentionTimes": [
+                        "2021-11-11T10:30:00.000Z"
+                    ],
+                    "retentionDuration": {
+                        "count": 180,
+                        "durationType": "Days"
+                    }
+                },
+                "weeklySchedule": null,
+                "monthlySchedule": null,
+                "yearlySchedule": null
+            }
+        },
+        "instantRPDetails": {
+            "value": {}
+        }
+    }
+}

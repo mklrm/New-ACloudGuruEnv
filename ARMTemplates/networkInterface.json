@@ -1,0 +1,84 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "String"
+        },
+        "name": {
+            "type": "String"
+        },
+        "ipConfig0Name": {
+            "type": "String"
+        },
+        "ipConfig0PrivateIPAddress": {
+            "type": "String"
+        },
+        "ipConfig0PrivateIPAllocationMethod": {
+            "type": "String"
+        },
+        "ipConfig0PrivateIPPrimary": {
+            "type": "Bool"
+        },
+        "ipConfig0PrivateIPAddressVersion": {
+            "type": "String"
+        },
+        "publicIPAddressId": {
+            "type": "String"
+        },
+        "virtualNetworkId": {
+            "type": "String"
+        },
+        "networkSecurityGroupId": {
+            "type": "String"
+        },
+        "subnetName": {
+            "type": "String"
+        },
+        "dnsSettings": {
+            "type": "Array"
+        },
+        "enableAcceleratedNetworking": {
+            "type": "Bool"
+        },
+        "enableIPForwarding": {
+            "type": "Bool"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2020-11-01",
+            "name": "[parameters('name')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "[parameters('ipConfig0Name')]",
+                        "properties": {
+                            "privateIPAddress": "[parameters('ipConfig0PrivateIPAddress')]",
+                            "privateIPAllocationMethod": "[parameters('ipConfig0PrivateIPAllocationmethod')]",
+                            "publicIPAddress": {
+                                "id": "[parameters('publicIPAddressId')]"
+                            },
+                            "subnet": {
+                                "id": "[concat(parameters('virtualNetworkId'), '/subnets/', parameters('subnetName'))]"
+                            },
+                            "primary": "[parameters('ipConfig0PrivateIPPrimary')]",
+                            "privateIPAddressVersion": "[parameters('ipConfig0PrivateIPAddressVersion')]"
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": "[parameters('dnsSettings')]"
+                },
+                "enableAcceleratedNetworking": "[parameters('enableAcceleratedNetworking')]",
+                "enableIPForwarding": "[parameters('enableIPForwarding')]",
+                "networkSecurityGroup": {
+                    "id": "[parameters('networkSecurityGroupId')]"
+                }
+            }
+        }
+    ]
+}

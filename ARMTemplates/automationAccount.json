@@ -1,0 +1,97 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "2.0.0.0",
+    "parameters": {
+        "name": {
+            "type": "String",
+            "metadata": {
+                "description": "Name of the automation account"
+            }
+        },
+        "location": {
+            "defaultValue": "[resourceGroup().location]",
+            "type": "String",
+            "metadata": {
+                "description": "Location for automation account"
+            }
+        }//,
+        //"sampleGraphicalRunbookName": {
+            //"type": "String"
+        //},
+        //"sampleGraphicalRunbookDescription": {
+            //"type": "String"
+        //},
+        //"sampleGraphicalRunbookContentUri": {
+            //"type": "String"
+        //},
+        //"samplePowerShellRunbookName": {
+            //"type": "String"
+        //},
+        //"samplePowerShellRunbookDescription": {
+            //"type": "String"
+        //},
+        //"samplePowerShellRunbookContentUri": {
+            //"type": "String"
+        //}
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Automation/automationAccounts",
+            "apiVersion": "2021-06-22",
+            "name": "[parameters('name')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [],
+            "tags": {},
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "sku": {
+                    "name": "Basic"
+                }
+            },
+            "resources": [
+                //{
+                    //"type": "runbooks",
+                    //"apiVersion": "2019-06-01",
+                    //"name": "[parameters('sampleGraphicalRunbookName')]",
+                    //"location": "[parameters('location')]",
+                    //"dependsOn": [
+                        //"[concat('Microsoft.Automation/automationAccounts/', parameters('name'))]"
+                    //],
+                    //"tags": {},
+                    //"properties": {
+                        //"runbookType": "GraphPowerShell",
+                        //"logProgress": false,
+                        //"logVerbose": false,
+                        //"description": "[parameters('sampleGraphicalRunbookDescription')]",
+                        //"publishContentLink": {
+                            //"uri": "[parameters('sampleGraphicalRunbookContentUri')]",
+                            //"version": "1.0.0.0"
+                        //}
+                    //}
+                //},
+                //{
+                    //"type": "runbooks",
+                    //"apiVersion": "2019-06-01",
+                    //"name": "[parameters('samplePowerShellRunbookName')]",
+                    //"location": "[parameters('location')]",
+                    //"dependsOn": [
+                        //"[concat('Microsoft.Automation/automationAccounts/', parameters('accountName'))]"
+                    //],
+                    //"tags": {},
+                    //"properties": {
+                        //"runbookType": "PowerShell",
+                        //"logProgress": false,
+                        //"logVerbose": false,
+                        //"description": "[parameters('samplePowerShellRunbookDescription')]",
+                        //"publishContentLink": {
+                            //"uri": "[parameters('samplePowerShellRunbookContentUri')]",
+                            //"version": "1.0.0.0"
+                        //}
+                    //}
+                //}
+            ]
+        }
+    ]
+}
